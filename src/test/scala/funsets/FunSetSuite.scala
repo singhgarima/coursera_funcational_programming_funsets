@@ -71,8 +71,21 @@ class FunSetSuite extends FunSuite {
     }
   }
   
+  trait SetMultipleOfTen {
+    val multipleOfTen = ((x: Int) => x % 10 == 0)
+  }
+  
   test("forall") {
-    assert(!forall((elem => elem < 10 & elem > 0), elem => elem < 2))
-    assert(forall((elem => elem < 10 & elem > 0), elem => elem < 11))
+    new SetMultipleOfTen {
+    	assert(!forall(multipleOfTen, elem => elem % 6 == 0))
+    	assert(forall(multipleOfTen, elem => elem % 2 == 0))
+    }
+  }
+  
+  test("exists") {
+    new SetMultipleOfTen {
+    	assert(exists(multipleOfTen, elem => elem % 6 == 0))
+    	assert(!exists(multipleOfTen, elem => elem == 11))
+    }
   }
 }
