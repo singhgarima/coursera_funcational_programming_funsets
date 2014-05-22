@@ -88,4 +88,17 @@ class FunSetSuite extends FunSuite {
     	assert(!exists(multipleOfTen, elem => elem == 11))
     }
   }
+  
+  test("maps") {
+    new SetMultipleOfTen {
+      val mappedSet = map(multipleOfTen, (x => x * 2))
+      assert(contains(mappedSet, 20))
+      assert(!contains(mappedSet, 30))
+    }
+  }
+  
+  test("toString") {
+    val multipleOfHundreds = ((x: Int) => x % 500 == 0)
+    assert(FunSets.toString(multipleOfHundreds) === "{-1000,-500,0,500,1000}")
+  }
 }
